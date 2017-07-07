@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import '../App.css';
-import PopulationDisplayer from './components/PopulationDisplayer';
 import PopulationRepository from './repositories/PopulationRepository';
+import PopulationDisplayer from './components/PopulationDisplayer';
 import ShortestCountriesDisplayer from './components/ShortestCountriesDisplayer'
 
 
@@ -11,40 +11,35 @@ class App extends Component {
     this.state = {
       worldPopulationToday: "",
       usPopulationToday: "",
-      shortestCountries: [],
       fullInfoOfShortest: [],
     };
+    this.repository = new PopulationRepository();
     this.fetchDataForPopulationDisplayer = this.fetchDataForPopulationDisplayer.bind(this);
     this.fetchShortestCountries = this.fetchShortestCountries.bind(this);
     this.fetchFullInfo = this.fetchFullInfo.bind(this);
-    this.repository = new PopulationRepository()
   }
 
   componentWillMount() {
     this.fetchDataForPopulationDisplayer();
     this.fetchShortestCountries();
-    this.fetchFullInfo(this.state.shortestCountries);
   }
 
-  fetchDataForPopulationDisplayer(repository){
+  fetchDataForPopulationDisplayer() {
     this.repository.getLocationPopulationOfDate("World", this.getTodaysDate()).then(
-      (response) => this.setState({worldPopulationToday: response})
+      response => this.setState({worldPopulationToday: response})
     );
     this.repository.getLocationPopulationOfDate("United States", this.getTodaysDate()).then(
-      (response) => this.setState({usPopulationToday: response})
+      response => this.setState({usPopulationToday: response})
     );
   }
 
-  fetchShortestCountries(){
+  fetchShortestCountries() {
     this.repository.fetchShortestCountries().then(
-      (response) => {
-        this.setState({shortestCountries: response});
-        this.fetchFullInfo(this.state.shortestCountries);
-      }
+      response => this.fetchFullInfo(response)
     );
   }
 
-  fetchFullInfo(countryArray){
+  fetchFullInfo(countryArray) {
     let fullInfoArray = [];
     countryArray.forEach((country) => {
       this.repository.fetchFullInfo(country).then(
@@ -61,11 +56,11 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-          <h3>World Population Application</h3>
-          <PopulationDisplayer title="World Population" date="As of Today"
-                               population={this.state.worldPopulationToday}/>
-          <PopulationDisplayer title="US Population" date="As of Today" population={this.state.usPopulationToday}/>
-          <ShortestCountriesDisplayer fullInfoOfShortest={this.state.fullInfoOfShortest} />
+        <h3>World Population Application</h3>
+        <PopulationDisplayer title="World Population" date="As of Today"
+                             population={this.state.worldPopulationToday}/>
+        <PopulationDisplayer title="US Population" date="As of Today" population={this.state.usPopulationToday}/>
+        <ShortestCountriesDisplayer fullInfoOfShortest={this.state.fullInfoOfShortest}/>
       </div>
     );
   }
