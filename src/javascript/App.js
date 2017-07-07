@@ -2,26 +2,57 @@ import React, {Component} from 'react';
 import '../App.css';
 import {Col, Grid, Row, Button} from 'react-bootstrap';
 import PopulationDisplayer from './components/PopulationDisplayer';
-import PopulationRepository from './repositories/PopulationRepository'
+import PopulationRepository from './repositories/PopulationRepository';
+import ShortestCountriesDisplayer from './components/ShortestCountriesDisplayer'
 
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-        worldPopulationToday: "",
-        usPopulationToday: "",
-      }
+      worldPopulationToday: "",
+      usPopulationToday: "",
+      shortestCountries: [],
+      fullInfoOfShortest: [],
+    };
+    this.fetchDataForPopulationDisplayer = this.fetchDataForPopulationDisplayer.bind(this);
+    this.fetchShortestCountries = this.fetchShortestCountries.bind(this);
+    this.fetchFullInfo = this.fetchFullInfo.bind(this);
+    this.repository = new PopulationRepository()
   }
 
   componentWillMount() {
-    let populationRepository = new PopulationRepository;
-    populationRepository.getCountryPopulationOfDate("World", this.getTodaysDate()).then(
+    this.fetchDataForPopulationDisplayer();
+    this.fetchShortestCountries();
+    this.fetchFullInfo(this.state.shortestCountries);
+  }
+
+  fetchDataForPopulationDisplayer(repository){
+    this.repository.getLocationPopulationOfDate("World", this.getTodaysDate()).then(
       (response) => this.setState({worldPopulationToday: response})
     );
-    populationRepository.getCountryPopulationOfDate("United States", this.getTodaysDate()).then(
+    this.repository.getLocationPopulationOfDate("United States", this.getTodaysDate()).then(
       (response) => this.setState({usPopulationToday: response})
     );
+  }
+
+  fetchShortestCountries(){
+    this.repository.fetchShortestCountries().then(
+      (response) => {
+        this.setState({shortestCountries: response});
+        this.fetchFullInfo(this.state.shortestCountries);
+      }
+    );
+  }
+
+  fetchFullInfo(countryArray){
+    let fullInfoArray = [];
+    countryArray.forEach((country) => {
+      this.repository.fetchFullInfo(country).then(
+        response => fullInfoArray.push(response[0])
+      )
+    });
+    this.setState({fullInfoOfShortest: fullInfoArray})
   }
 
   getTodaysDate() {
@@ -29,21 +60,14 @@ class App extends Component {
   }
 
   render() {
+    console.log(this.state);
     return (
       <div className="App">
-        <Grid>
-          <Row className="nav-grid">
-            <Col md={6} xsOffset={6}>
-              <h3>World Population Application</h3>
-            </Col>
-            <Col md={6} mdPull={6}>
-              <PopulationDisplayer title="World Population" date="As of Today" population={this.state.worldPopulationToday}/>
-            </Col>
-            <Col md={6} mdPull={6}>
-              <PopulationDisplayer title="US Population" date="As of Today" population={this.state.usPopulationToday}/>
-            </Col>
-          </Row>
-        </Grid>
+          <h3>World Population Application</h3>
+          <PopulationDisplayer title="World Population" date="As of Today"
+                               population={this.state.worldPopulationToday}/>
+          <PopulationDisplayer title="US Population" date="As of Today" population={this.state.usPopulationToday}/>
+          <ShortestCountriesDisplayer fullInfoOfShortest={this.state.fullInfoOfShortest} />
       </div>
     );
   }
