@@ -2,7 +2,8 @@ import React, {Component} from 'react';
 import '../App.css';
 import PopulationRepository from './repositories/PopulationRepository';
 import PopulationDisplayer from './components/PopulationDisplayer';
-import ShortestCountriesDisplayer from './components/ShortestCountriesDisplayer'
+import ShortestCountriesDisplayer from './components/ShortestCountriesDisplayer';
+import RankChecker from './components/RankChecker';
 
 
 class App extends Component {
@@ -61,6 +62,7 @@ class App extends Component {
                              population={this.state.worldPopulationToday}/>
         <PopulationDisplayer title="US Population" date="As of Today" population={this.state.usPopulationToday}/>
         <ShortestCountriesDisplayer fullInfoOfShortest={this.state.fullInfoOfShortest}/>
+        <RankChecker/>
       </div>
     );
   }

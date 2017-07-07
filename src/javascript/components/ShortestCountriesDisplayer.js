@@ -13,11 +13,11 @@ class ShortestCountriesDisplayer extends React.Component {
   }
 
   handleClick() {
-    this.setState({show: !this.state.show})
+    this.setState({show: !this.state.show});
     this.setState({buttonText: this.state.buttonText === "Fetch" ? "Hide" : "Fetch"})
   }
 
-  totalPopulationDisplayer(){
+  countPopulation(){
     let totalPopulation = 0;
     let totalCountryNumber = 0;
 
@@ -25,11 +25,16 @@ class ShortestCountriesDisplayer extends React.Component {
       totalCountryNumber++;
       totalPopulation += country.total;
     });
+    return {totalPopulation: totalPopulation, totalCountryNumber: totalCountryNumber};
+  }
 
+  totalPopulationDisplayer(){
+    let cumulative = this.countPopulation();
+    
     return <div className="population-sum" hidden={!this.state.show}>
-      <span className="sum-population-of-countries"> Total Population of Countries: {totalPopulation}</span>
-      <span className="sum-no-of-countries"> Number of Countries: {totalCountryNumber}</span>
-    </div>
+      <span className="sum-population-of-countries"> Total Population of Countries: {cumulative.totalPopulation}</span>
+      <span className="sum-no-of-countries"> Number of Countries: {cumulative.totalCountryNumber}</span>
+    </div>;
   }
 
   grid() {
@@ -51,11 +56,11 @@ class ShortestCountriesDisplayer extends React.Component {
       <div>
         <h3> Shortest Country Names</h3>
         <h5> Populations of countries with shortest names </h5>
-        <Button onClick={this.handleClick}>{this.state.buttonText}</Button>
+        <Button onClick={this.handleClick}>{this.state.selectedGender}</Button>
         {this.totalPopulationDisplayer()}
         {this.grid()}
       </div>
-    )
+    );
   }
 }
 
