@@ -30,7 +30,7 @@ class ShortestCountriesDisplayer extends React.Component {
 
   totalPopulationDisplayer(){
     let cumulative = this.countPopulation();
-    
+
     return <div className="population-sum" hidden={!this.state.show}>
       <span className="sum-population-of-countries"> Total Population of Countries: {cumulative.totalPopulation}</span>
       <span className="sum-no-of-countries"> Number of Countries: {cumulative.totalCountryNumber}</span>

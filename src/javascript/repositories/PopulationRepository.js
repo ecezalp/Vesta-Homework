@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import * as _ from 'lodash';
-import API_BASE_LINK from '../constants'
+import API_BASE_LINK from '../helpers/constants'
 
 export default class PopulationRepository {
 
@@ -32,6 +32,12 @@ export default class PopulationRepository {
   fetchFullInfo(country) {
     let year = this.getCurrentYear();
     return axios.get(API_BASE_LINK + `/population/${year}/${country}/18`).then(
+      response => response.data
+    )
+  }
+
+  fetchRanking(dob, gender){
+    return axios.get(API_BASE_LINK + `/wp-rank/${dob}/${gender}/World/today/`).then(
       response => response.data
     )
   }

@@ -62,7 +62,7 @@ class App extends Component {
                              population={this.state.worldPopulationToday}/>
         <PopulationDisplayer title="US Population" date="As of Today" population={this.state.usPopulationToday}/>
         <ShortestCountriesDisplayer fullInfoOfShortest={this.state.fullInfoOfShortest}/>
-        <RankChecker/>
+        <RankChecker fetchRank={this.repository.fetchRanking}/>
       </div>
     );
   }
