@@ -17,6 +17,10 @@ export function currentYear() {
   return new Date().getFullYear();
 }
 
+export function getTodaysDate() {
+  return new Date().toJSON().slice(0, 10);
+}
+
 function checkValue(a, b, c){
   return (a < b && b < c);
 }

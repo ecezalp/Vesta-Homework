@@ -25,7 +25,8 @@ export default class RankChecker extends React.Component {
   }
 
   dateOfBirthField() {
-    return <input placeholder="mm-dd-yyyy" onChange={e => this.setState({dOBValue: e.target.value})} value={this.state.dOBValue}/>
+    return <input placeholder="mm-dd-yyyy" onChange={e => this.setState({dOBValue: e.target.value})}
+                  value={this.state.dOBValue}/>
   }
 
   handleGenderChange(gender) {
@@ -78,24 +79,22 @@ export default class RankChecker extends React.Component {
       buttonText: "Fetch",
       dOBErrorMessage: null,
       genderErrorMessage: null,
+      worldRanking: null,
     });
   }
 
 
   handleFetch() {
-    this.handleClear();
     this.validateDOB();
     this.validateGender();
 
     // if (this.state.dOBErrorMessage === "" && this.state.genderErrorMessage === "") {
-      this.props.fetchRank(this.formatDOBforRequest(this.state.dOBValue), this.state.selectedGender.toLowerCase()).then(
-        (response) => {
-          this.setState({worldRanking: response});
-        }
-      );
-    // }
-
-    this.setState({buttonText: "Clear"});
+    this.props.fetchRank(this.formatDOBforRequest(this.state.dOBValue), this.state.selectedGender.toLowerCase()).then(
+      (response) => {
+        this.setState({worldRanking: response});
+        this.setState({buttonText: "Clear"});
+      }
+    );
   }
 
   parseWorldRanking() {
@@ -103,12 +102,12 @@ export default class RankChecker extends React.Component {
       let ranking = this.state.worldRanking;
       return (<div className="world-ranking">
         <div id="left">
-          <h5>DOB: {ranking.dob}</h5>
-          <h5>Gender: {ranking.sex}</h5>
+          <p>DOB: {ranking.dob}</p>
+          <p>Gender: {ranking.sex}</p>
         </div>
         <div id="right">
-          <h4>Your Rank in the World </h4>
-          <h5>You are ranked {ranking.rank}</h5>
+          <p><b>Your Rank in the World </b></p>
+          <p>You are ranked {ranking.rank}</p>
         </div>
       </div>);
     }
@@ -117,14 +116,14 @@ export default class RankChecker extends React.Component {
   render() {
     return (
       <div>
-        <h3>Check Your Ranking</h3>
-        Enter your information to check where you rank
+        <h1>Check Your Ranking</h1>
+        <p>Enter your information to check where you rank</p>
         {this.dateOfBirthField()}
         {this.genderDropDown(this.state.selectedGender)}
         {this.displayFetchButton()}
-        {this.state.dOBErrorMessage}
-        {this.state.genderErrorMessage}
-        {this.parseWorldRanking()}
+        <p className="red"> {this.state.dOBErrorMessage} </p>
+        <p className="red">{this.state.genderErrorMessage} </p>
+        {this.state.worldRanking && this.parseWorldRanking()}
       </div>
     )
   }

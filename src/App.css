@@ -1,43 +1,89 @@
 .App {
-  text-align: center;
+    text-align: center;
+    font-size: 1.2em;
 }
 
 .App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+    animation: App-logo-spin infinite 20s linear;
+    height: 80px;
 }
 
 .App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+    background-color: #222;
+    height: 150px;
+    padding: 20px;
+    color: white;
 }
 
 .App-intro {
-  font-size: large;
+    font-size: large;
 }
 
 .population-displayer {
-  width: 50vw;
-  margin-top: 10vh;
+    width: 50vw;
+    margin-top: 10vh;
 }
 
 .shortest-country-displayer {
-  border: solid;
+    border: solid;
 }
 
-/*#left {*/
-  /*float: left;*/
-/*}*/
+#left {
+    font-family: 'Delius';
+    float: left;
+    width: 50%;
+    height: 50%;
+    padding-top: 5px;
+    border-left: 1px solid;
+    border-top: 1px solid;
+    border-bottom: 1px solid;
+}
 
-/*#right {*/
-  /*float: right;*/
-/*}*/
+#right {
+    font-family: 'Delius';
+    float: right;
+    width: 50%;
+    height: 50%;
+    padding-top: 5px;
+    border-right: 1px solid;
+    border-top: 1px solid;
+    border-bottom: 1px solid;
+    margin-bottom: 5px;
+}
+
+b {
+    font-weight: bold;
+    color: darkred;
+}
+
+.sum-population-of-countries {
+    margin-right: 25%;
+}
+
+.red {
+    color: darkred;
+}
 
 .dark {
-  color: white;
-  background-color: black;
-  display: inline-block;
+    color: white;
+    background-color: dimgray;
+    display: inline-block;
+    border-radius: 2px;
+    padding: 2px 5px 2px 5px;
+    margin-bottom: 10px;
 }
+
+h1 {
+    font-family: 'Delius';
+}
+
+col {
+    margin: 10px 10px 10px 10px;
+}
+
+p {
+    margin-top: 2px;
+}
+
+
 
