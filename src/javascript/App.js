@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import '../App.css';
-import {Col, Grid, Row, Button} from 'react-bootstrap';
 import PopulationDisplayer from './components/PopulationDisplayer';
 import PopulationRepository from './repositories/PopulationRepository';
 import ShortestCountriesDisplayer from './components/ShortestCountriesDisplayer'
@@ -60,7 +59,6 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.state);
     return (
       <div className="App">
           <h3>World Population Application</h3>

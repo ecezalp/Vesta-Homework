@@ -23,9 +23,17 @@
   margin-top: 10vh;
 }
 
-.shortest-country-cell {
-
+.shortest-country-displayer {
+  border: solid;
 }
+
+/*#left {*/
+  /*float: left;*/
+/*}*/
+
+/*#right {*/
+  /*float: right;*/
+/*}*/
 
 .dark {
   color: white;

@@ -1,6 +1,3 @@
-/**
- * Created by eceozalp on 7/5/17.
- */
 import React from 'react';
 import PropTypes from 'prop-types';
 
@@ -17,6 +14,6 @@ export default function PopulationDisplayer(props) {
 PopulationDisplayer.propTypes = {
   title: PropTypes.string,
   date: PropTypes.string,
-  population: PropTypes.string,
+  population: PropTypes.number,
 };
 
