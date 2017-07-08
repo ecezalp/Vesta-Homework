@@ -114,7 +114,7 @@ export default class RankChecker extends React.Component {
         </div>
         <div id="right">
           <p><b>Your Rank in the World </b></p>
-          <p>You are ranked {ranking.rank}</p>
+          <p>You are ranked {ranking.rank.toLocaleString()}</p>
         </div>
       </div>);
     }

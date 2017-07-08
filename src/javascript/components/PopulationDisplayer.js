@@ -6,6 +6,6 @@ export default function PopulationDisplayer(props) {
     <h1 id="population-displayer-title">{props.title}</h1>
     <div id="population-displayer-date" className="dark">{props.date}</div>
     <br/>
-    <div id="population-displayer-population" className="dark">{props.population}</div>
+    <div id="population-displayer-population" className="dark">{props.population.toLocaleString()}</div>
   </div>);
 }

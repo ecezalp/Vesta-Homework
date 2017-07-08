@@ -1,6 +1,7 @@
 .App {
     text-align: center;
     font-size: 1.2em;
+    padding-bottom: 50px;
 }
 
 .population-displayer {

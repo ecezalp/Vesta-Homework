@@ -33,7 +33,7 @@ class ShortestCountriesDisplayer extends React.Component {
     return <div className="population-sum" hidden={!this.state.show}>
       <p><br/>
         <span
-          className="sum-of-countries"> Total Population of Countries: {cumulative.totalPopulation}</span>
+          className="sum-of-countries"> Total Population of Countries: {cumulative.totalPopulation.toLocaleString()}</span>
         <span className="sum-of-populations"> Number of Countries: {cumulative.totalCountryNumber}</span>
         <br/>
       </p>
@@ -46,11 +46,11 @@ class ShortestCountriesDisplayer extends React.Component {
         <div className="shortest-cell" hidden={!this.state.show}>
           <div id="left">
             <p><b>{country.country}</b></p>
-            <p>Total Population: {country.total}</p>
+            <p>Total Population: {country.total.toLocaleString()}</p>
           </div>
           <div id="right">
-            <p>Male Population: {country.males}</p>
-            <p>Female Population: {country.females}</p>
+            <p>Male Population: {country.males.toLocaleString()}</p>
+            <p>Female Population: {country.females.toLocaleString()}</p>
           </div>
         </div>
       </Row>);
