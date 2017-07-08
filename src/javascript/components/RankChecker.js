@@ -89,6 +89,7 @@ export default class RankChecker extends React.Component {
     this.validateGender();
     // to handle async setState of the validators..
     setTimeout(() => {
+      // eslint-disable-next-line
       this.fetchData(), 1000
     });
   }
