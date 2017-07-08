@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, Col, Row} from 'react-bootstrap';
+import {Button, Row} from 'react-bootstrap';
 
 class ShortestCountriesDisplayer extends React.Component {
 
@@ -30,12 +30,11 @@ class ShortestCountriesDisplayer extends React.Component {
 
   totalPopulationDisplayer() {
     let cumulative = this.countPopulation();
-
     return <div className="population-sum" hidden={!this.state.show}>
       <p><br/>
         <span
-          className="sum-population-of-countries"> Total Population of Countries: {cumulative.totalPopulation}</span>
-        <span className="sum-no-of-countries"> Number of Countries: {cumulative.totalCountryNumber}</span>
+          className="sum-of-countries"> Total Population of Countries: {cumulative.totalPopulation}</span>
+        <span className="sum-of-populations"> Number of Countries: {cumulative.totalCountryNumber}</span>
         <br/>
       </p>
     </div>;
@@ -43,8 +42,8 @@ class ShortestCountriesDisplayer extends React.Component {
 
   grid() {
     return this.props.fullInfoOfShortest.map((country, index) =>
-      <Row>
-        <div className="shortest-country-cell" hidden={!this.state.show} key={index}>
+      <Row key={index}>
+        <div className="shortest-cell" hidden={!this.state.show}>
           <div id="left">
             <p><b>{country.country}</b></p>
             <p>Total Population: {country.total}</p>

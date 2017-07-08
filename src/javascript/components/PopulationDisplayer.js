@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 export default function PopulationDisplayer(props) {
 
@@ -10,10 +9,3 @@ export default function PopulationDisplayer(props) {
     <div id="population-displayer-population" className="dark">{props.population}</div>
   </div>);
 }
-
-PopulationDisplayer.propTypes = {
-  title: PropTypes.string,
-  date: PropTypes.string,
-  population: PropTypes.number,
-};
-

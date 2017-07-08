@@ -1,4 +1,3 @@
-import React from 'react';
 import axios from 'axios';
 import * as _ from 'lodash';
 import API_BASE_LINK from '../helpers/constants'

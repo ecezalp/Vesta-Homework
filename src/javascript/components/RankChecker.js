@@ -22,6 +22,7 @@ export default class RankChecker extends React.Component {
     this.handleButtonClick = this.handleButtonClick.bind(this);
     this.handleFetch = this.handleFetch.bind(this);
     this.handleClear = this.handleClear.bind(this);
+    this.fetchData = this.fetchData.bind(this);
   }
 
   dateOfBirthField() {
@@ -34,9 +35,9 @@ export default class RankChecker extends React.Component {
   }
 
   genderDropDown(currentGender) {
-    return <DropdownButton title={currentGender}>
-      <MenuItem onClick={() => this.handleGenderChange("Female")}>Female</MenuItem>
-      <MenuItem onClick={() => this.handleGenderChange("Male")}>Male</MenuItem>
+    return <DropdownButton id="dropdown" title={currentGender}>
+      <MenuItem id="female" onClick={() => this.handleGenderChange("Female")}>Female</MenuItem>
+      <MenuItem id="male" onClick={() => this.handleGenderChange("Male")}>Male</MenuItem>
     </DropdownButton>
   }
 
@@ -47,13 +48,13 @@ export default class RankChecker extends React.Component {
       !validDay(toBeValidated.slice(3, 5)) ||
       !validMonth(toBeValidated.slice(0, 2)) ||
       !validYear(toBeValidated.slice(6, 10))) {
-      errorMessage = "Invalid Date"
+      errorMessage = "Invalid Date Format"
     }
     this.setState({dOBErrorMessage: errorMessage});
   }
 
   displayFetchButton() {
-    return <Button onClick={this.handleButtonClick}>{this.state.buttonText} </Button>
+    return <Button onClick={this.handleButtonClick}>{this.state.buttonText}</Button>
   }
 
   formatDOBforRequest(date) {
@@ -63,7 +64,7 @@ export default class RankChecker extends React.Component {
   validateGender() {
     let errorMessage = "";
     if (!(this.state.selectedGender === "Male" || this.state.selectedGender === "Female")) {
-      errorMessage = "Non-Binary not supported";
+      errorMessage = "Gender must be binary";
     }
     this.setState({genderErrorMessage: errorMessage});
   }
@@ -83,18 +84,24 @@ export default class RankChecker extends React.Component {
     });
   }
 
-
   handleFetch() {
     this.validateDOB();
     this.validateGender();
+    // to handle async setState of the validators..
+    setTimeout(() => {
+      this.fetchData(), 1000
+    });
+  }
 
-    // if (this.state.dOBErrorMessage === "" && this.state.genderErrorMessage === "") {
-    this.props.fetchRank(this.formatDOBforRequest(this.state.dOBValue), this.state.selectedGender.toLowerCase()).then(
-      (response) => {
-        this.setState({worldRanking: response});
-        this.setState({buttonText: "Clear"});
-      }
-    );
+  fetchData() {
+    if (this.state.dOBErrorMessage === "" && this.state.genderErrorMessage === "") {
+      this.props.fetchRank(this.formatDOBforRequest(this.state.dOBValue), this.state.selectedGender.toLowerCase()).then(
+        (response) => {
+          this.setState({worldRanking: response});
+          this.setState({buttonText: "Clear"});
+        }
+      )
+    }
   }
 
   parseWorldRanking() {
@@ -115,12 +122,12 @@ export default class RankChecker extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="ranking-container">
         <h1>Check Your Ranking</h1>
         <p>Enter your information to check where you rank</p>
-        {this.dateOfBirthField()}
-        {this.genderDropDown(this.state.selectedGender)}
-        {this.displayFetchButton()}
+        <span className="rank-span">{this.dateOfBirthField()}</span>
+        <span className="rank-span">{this.genderDropDown(this.state.selectedGender)}</span>
+        <span className="rank-span">{this.displayFetchButton()}</span>
         <p className="red"> {this.state.dOBErrorMessage} </p>
         <p className="red">{this.state.genderErrorMessage} </p>
         {this.state.worldRanking && this.parseWorldRanking()}

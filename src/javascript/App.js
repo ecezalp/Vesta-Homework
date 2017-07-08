@@ -56,7 +56,7 @@ class App extends Component {
       <div className="App">
         <Grid>
           <Row>
-            <Col xs={6} xsOffset={6}>
+            <Col>
               <h1>World Population Application</h1>
             </Col>
           </Row>

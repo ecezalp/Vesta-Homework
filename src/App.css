@@ -3,22 +3,6 @@
     font-size: 1.2em;
 }
 
-.App-logo {
-    animation: App-logo-spin infinite 20s linear;
-    height: 80px;
-}
-
-.App-header {
-    background-color: #222;
-    height: 150px;
-    padding: 20px;
-    color: white;
-}
-
-.App-intro {
-    font-size: large;
-}
-
 .population-displayer {
     width: 50vw;
     margin-top: 10vh;
@@ -51,12 +35,16 @@
     margin-bottom: 5px;
 }
 
+.rank-span {
+    margin: 10px;
+}
+
 b {
     font-weight: bold;
     color: darkred;
 }
 
-.sum-population-of-countries {
+.sum-of-countries {
     margin-right: 25%;
 }
 
